@@ -1,0 +1,13 @@
+.entry-page {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wrapper {
+    padding: 5rem 3rem;
+    border-radius: 5px;
+    -webkit-box-shadow: 3px 4px 9px 4px rgba(0, 0, 0, 0.66);
+    box-shadow: 3px 4px 9px 4px rgba(0, 0, 0, 0.66);
+}

@@ -19,7 +19,7 @@ const AddTicket = () => {
 
     const [formData, setFormData] = useState(initialState)
 
-    const [formDataError, setFormDataError] = useState(setFormDataError);
+    const [formDataError, setFormDataError] = useState(initialError);
 
     useEffect(() => {}, [formData, formDataError]);
 

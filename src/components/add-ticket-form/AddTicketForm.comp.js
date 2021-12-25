@@ -1,7 +1,6 @@
 import React from 'react'
 import { Form, Button, Row, Col } from "react-bootstrap"
 import PropTypes from "prop-types"
-import { shortText } from "../../utils/validation"
 
 const AddTicketForm = ({
   handleSubmit,

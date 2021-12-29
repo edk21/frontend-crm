@@ -42,6 +42,6 @@ code {
 .message{
   padding: 1rem;
   width: 80%;
-  border: 1px solid "ced4da";
+  border: 1px solid #ced4da;
   border-radius: 0.25rem;
 }

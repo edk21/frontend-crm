@@ -1,0 +1,21 @@
+### User singup endpoint
+POST http://localhost:3001/v1/user
+Content-Type: application/json
+
+{
+    "name": "Prem Admin",
+    "compagny": "First Compagny",
+    "address": "In Tienen",
+    "phone": "0458525252",
+    "email": "admin@gmail.com",
+    "password": "admin123456"
+}
+
+### User singin endpoint
+POST http://localhost:3001/v1/user/login
+Content-Type: application/json
+
+{
+    "email": "admin@gmail.com",
+    "password": "admin123456"
+}

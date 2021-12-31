@@ -6,4 +6,4 @@ const handleError = (error, res) => {
     })
 }
 
-module.ex = handleError
+module.exports = handleError

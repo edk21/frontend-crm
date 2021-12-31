@@ -11,7 +11,7 @@ require("dotenv").config()
 const PORT = process.env.PORT || 3001
 
 //API security
-app.use(helmet())
+//app.use(helmet())
 
 //handle cors error
 app.use(cors())

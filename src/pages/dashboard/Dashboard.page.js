@@ -1,4 +1,5 @@
-import React from 'react'
+import React,{useEffect} from 'react'
+import { useSelector, useDispatch } from 'react-redux';
 import { Container, Row, Col, Button } from "react-bootstrap"
 import TicketTable from '../../components/ticket.table/TicketTable.comp'
 import tickets from "../../assets/data/dummy-tickets.json"
@@ -6,7 +7,21 @@ import BreadCrumb from '../../components/breadcrumb/BreadCrumb.comp'
 //import { useHistory } from 'react-router-dom';
 import { Link } from "react-router-dom"
 
+import { fetchAllTickets } from '../ticket-list/ticketsAction';
+
 export const Dashboard = () => {
+  const dispatch = useDispatch();
+  const { tickets } = useSelector((state) => state.tickets);
+
+  useEffect(() => {
+    if (!tickets.length) {
+      dispatch(fetchAllTickets());
+    }
+  }, [tickets, dispatch]);
+
+  const pendingTickets = tickets.filter((row) => row.status !== 'Closed');
+  const totaltTickets = tickets.length;
+
     return (
       <Container>
         <Row>
@@ -28,8 +43,8 @@ export const Dashboard = () => {
         </Row>
         <Row>
           <Col className='text-center mb-2'>
-            <div>Total Tickets: 50</div>
-            <div>Pending Tickets: 5</div>
+            <div>Total Tickets: { totaltTickets }</div>
+            <div>Pending Tickets: {pendingTickets.length}</div>
           </Col>
         </Row>
         <Row>

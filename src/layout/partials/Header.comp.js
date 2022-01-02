@@ -4,11 +4,17 @@ import image from "../../assets/images/africa.jpeg"
 import { useHistory } from "react-router-dom"
 import {LinkContainer} from "react-router-bootstrap"
 
-const Header = () => {
-    const history = useHistory()
+import { userLogout } from '../../api/userApi';
 
-    const loginOut = () => {
-        history.push("/")    }
+const Header = () => {
+    const history = useHistory();
+
+    const logMeOut = () => {
+      sessionStorage.removeItem('accessJWT');
+      localStorage.removeItem('crmSite');
+      userLogout();
+      history.push('/');
+    };
 
     return (
       <Navbar collapseOnSelect bg='info' variant='dark' expand='md'>
@@ -18,9 +24,6 @@ const Header = () => {
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav className='ms-auto px-3'>
-            {/* <Link to="/dashboard" className='text-white'>Dashboard</Link>
-                    <Link to="/tickets" className='text-white mx-2'>Tickets</Link>
-                    <Link to="" className='text-white'>Logout</Link> */}
             <LinkContainer to='/dashboard'>
               <Nav.Link className='text-white'>Dashboard</Nav.Link>
             </LinkContainer>
@@ -29,7 +32,7 @@ const Header = () => {
                 Tickets
               </Nav.Link>
             </LinkContainer>
-              <Nav.Link onClick={loginOut} className='text-white'>
+              <Nav.Link onClick={logMeOut} className='text-white'>
                 Logout
               </Nav.Link>
           </Nav>

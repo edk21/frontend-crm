@@ -10,7 +10,7 @@ const UserSchema = new Schema({
   compagny: {
     type: String,
     maxlength: 50,
-    required: true,
+    // required: true,
   },
   address: {
     type: String,
@@ -30,6 +30,23 @@ const UserSchema = new Schema({
     minlength: 6,
     maxlength: 100,
     required: true,
+  },
+  refreshJWT: {
+    token: {
+      type: String,
+      maxlength: 500,
+      defalut: ""
+    },
+    addedAt: {
+      type: Date,
+      required: true,
+      default: Date.now()
+    },
+  },
+  isVerified: {
+    type: Boolean,
+    required: true,
+    default: false,
   },
 });
 

@@ -1,10 +1,35 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { Form, Button } from 'react-bootstrap'
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types'
 
-const UpdateTicket = ({ msg, handleOnChange, handleSubmit }) => {
+import { replyOnTicket } from '../../pages/ticket-list/ticketsAction';
+
+const UpdateTicket = ({ _id }) => {
+  const dispatch = useDispatch();
+  const {
+    user: { name },
+  } = useSelector((state) => state.user);
+  const [message, setMessage] = useState('');
+
+  const handleOnChange = (e) => {
+    setMessage(e.target.value);
+  };
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+
+    const msgObj = {
+      message,
+      sender: name,
+    };
+
+    dispatch(replyOnTicket(_id, msgObj));
+    setMessage('');
+  };
+
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleOnSubmit}>
       <Form.Label>Reply</Form.Label>
       <hr />
       <Form.Text>
@@ -27,7 +52,5 @@ const UpdateTicket = ({ msg, handleOnChange, handleSubmit }) => {
 
 export default UpdateTicket
 UpdateTicket.propTypes = {
-  msg: PropTypes.string.isRequired,
-  handleOnChange: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
+  _id: PropTypes.string.isRequired,
 };

@@ -11,7 +11,7 @@ require("dotenv").config()
 const PORT = process.env.PORT || 3001
 
 //API security
-//app.use(helmet())
+app.use(helmet())
 
 //handle cors error
 app.use(cors())
@@ -49,22 +49,24 @@ app.use(bodyParser.json())
 //load routers
 const userRouter = require("./src/routers/user.router")
 const ticketRouter = require("./src/routers/ticket.router")
+const tokensRouter = require('./src/routers/tokens.router');
 
 //use routers
 app.use("/v1/user", userRouter)
 app.use("/v1/ticket", ticketRouter)
+app.use('/v1/tokens', tokensRouter);
 
 //error handling
 const handleError = require("./src/utils/errorHandler")
 
-app.use("*", (req, res, next) => {
+app.use((req, res, next) => {
     const error = new Error('Ressouces are not found!');
     error.status = 404
     
     next(error)
 })
 
-app.use("*", (error, req, res, next) => {
+app.use((error, req, res, next) => {
     handleError(error, res)
 })
 

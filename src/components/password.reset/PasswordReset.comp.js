@@ -1,21 +1,42 @@
-import React from 'react'
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import PropTypes from 'prop-types';
+import React,{useState} from 'react'
+import { Container, Row, Col, Form, Button, Spinner, Alert } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { sendPasswordResetOtp } from './passwordAction';
 
 
-const PasswordReset = ({
-  handleOnChange,
-  email,
-  handleOnResetSubmit,
-  formSwitcher,
-}) => {
+const PasswordReset = () => {
+
+  const dispatch = useDispatch();
+
+  const [email, setEmail] = useState('');
+
+  const { isLoading, status, message } = useSelector((state) => state.password);
+
+  const handleOnResetSubmit = (e) => {
+    e.preventDefault();
+
+    dispatch(sendPasswordResetOtp(email));
+  };
+
+  const handleOnChange = (e) => {
+    const { value } = e.target;
+    setEmail(value);
+  };
   return (
     <Container>
       <Row>
         <Col>
           <h1 className='text-info text-center'>Reset Password</h1>
           <hr />
-          <Form onSubmit={handleOnResetSubmit}>
+          {message && (
+            <Alert variant={status === 'success' ? 'success' : 'danger'}>
+              {message}
+            </Alert>
+          )}
+
+          {isLoading && <Spinner variant='primary' animation='border' />}
+
+          <Form autoComplete='off' onSubmit={handleOnResetSubmit}>
             <Form.Group>
               <Form.Label>Email Address</Form.Label>
               <Form.Control
@@ -34,22 +55,8 @@ const PasswordReset = ({
           <hr />
         </Col>
       </Row>
-      <Row>
-        <Col>
-          <a href='#!' onClick={() => formSwitcher('login')}>
-            Login Now?
-          </a>
-        </Col>
-      </Row>
     </Container>
   );
 };
 
 export default PasswordReset
-
-PasswordReset.propTypes = {
-  handleOnChange: PropTypes.func.isRequired,
-  password: PropTypes.string.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  formSwitcher: PropTypes.func.isRequired,
-};

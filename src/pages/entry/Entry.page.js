@@ -46,7 +46,7 @@ const Entry = () => {
 
     return (
       <div className='entry-page bg-info'>
-        <div className='wrapper bg-light'>
+        <div className='wrapper bg-light jumbotron'>
           {formLoad === 'login' ? (
             <LoginForm
               handleOnChange={handleOnChange}
